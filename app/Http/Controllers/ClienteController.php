@@ -26,25 +26,24 @@ class ClienteController extends Controller
     }
 
     public function costumer_edit($id){
-            
-        $emp = Cliente::where('id_pessoa', '=', $id)->get();
-    
-    foreach ($emp as $a) {
-        $pes = Pessoa::where('id', '=', $a['id_pessoa'])->get();
-        $end = Endereco::where('id_pessoa', '=', $a['id_pessoa'])->get();
-    }
+
+    $list = Pessoa::join('clientes', 'clientes.id_pessoa', '=', 'pessoas.id')
+        ->join('enderecos', 'enderecos.id', '=', 'pessoas.id')
+        ->select('pessoas.*', 'enderecos.*', 'clientes.id as cliente_id', 'clientes.*')
+        ->where('clientes.id_pessoa', '=', $id)
+        ->get();
     
     $files = Storage::files('cli');
     $path = 0;
     
     foreach ($files as $f) {
-        if($f == "cli/". $emp[0]->foto){
+        if($f == "cli/". $list[0]->foto){
             $path = $f;
         }
     }
 
 
-    return view('costumer/edit_cos', ['list' => $emp, 'pes' => $pes, 'end' => $end, 'path' => $path] );
+    return view('costumer/edit_cos', ['list' => $list, 'path' => $path] );
        
 }
 

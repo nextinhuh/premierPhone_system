@@ -8,6 +8,8 @@ use App\Models\Fornecedor;
 use App\Models\Fornecedores_produto;
 use App\Models\Pessoa;
 use App\Models\Categoria;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProdutoController extends Controller
 {
@@ -31,22 +33,6 @@ class ProdutoController extends Controller
         $cat = Categoria::select()->get();
         return view('product/productss', ['list' => $list, 'cat' => $cat]);
     }
-
-    public function inventory_edit($id){
-        $list = Pessoa::join('fornecedores', 'fornecedores.id_pessoa', '=', 'pessoas.id')
-        ->join('fornecedores_produtos', 'fornecedores_produtos.id_fornecedor', '=', 'fornecedores.id')
-        ->join('produtos', 'produtos.id', '=', 'fornecedores_produtos.id_produto')
-        ->select('pessoas.nome', 'produtos.id', 'fornecedores_produtos.dt_entrada', 'produtos.qtd_prod', 'produtos.vlr_unitario', 'produtos.nome as nome_prod')
-        ->where('produtos.id', '=', $id)
-        ->get();
-
-        $pes = Fornecedor::join('pessoas', 'pessoas.id', '=', 'fornecedores.id_pessoa')
-        ->select('fornecedores.id', 'pessoas.nome')
-        ->get();
-        
-        return view('inventory/inventory_edit', ['list' => $list, 'pes' =>$pes]);
-    }
-
 
     public function save_product(Request $request){
 
@@ -89,14 +75,14 @@ class ProdutoController extends Controller
                     $pro = new Produto();
                     $tes = "1.".$request->foto->extension();
                     $request->foto->storeAs('prod', $tes);
-                    $pro->img_prod = $tes;
+                    $pro->img_prod = $tes;-
                     $pro->nome = $request->nome_pro;
                     $pro->marca =$request->marca;                    
                     $pro->vlr_unitario =$valor_venda;                    
                     $pro->id_categoria = $request->categoria;
                 }else{
                     $pro = new Produto();
-                    $tes = ($lastId->id + 1).".".$request->foto->extension();
+                    $tes = ($lastId->id + 10).".".$request->foto->extension();
                     $request->foto->storeAs('prod', $tes);
                     $pro->img_prod = $tes;
                     $pro->nome = $request->nome_pro;
@@ -121,7 +107,7 @@ class ProdutoController extends Controller
                         $for_prod->vlr_compra = $valor_compra;
                         $for_prod->total_compra = $valor_compra * $request->quantidade;
                         $for_prod->qtd_prod = $request->quantidade;
-                        $for_prod->id_produto =($lastId->id + 1);
+                        $for_prod->id_produto =($lastId->id + 10);
                     }
                     
                     if($for_prod->save()){
@@ -138,7 +124,21 @@ class ProdutoController extends Controller
             }
     }
 
-    public function product_edit(Request $request){
+    public function product_edit($id){
+        $list = Produto::where('id', '=', $id)->get();
+        $cat = Categoria::select()->get();
+        $files = Storage::files('prod');
+        $path = 0;
+        
+        foreach ($files as $f) {
+            if($f == "prod/". $list[0]->img_prod){
+                $path = $f;
+            }
+        }
+        return view('product/edit', ['list' => $list, 'cat' =>$cat, 'path' => $path]);
+    }
+
+    public function save_product_edit(Request $request){
         
         $request->validate([
             'nome_prod' => 'required',
@@ -154,7 +154,7 @@ class ProdutoController extends Controller
             'valor_venda' => 'Valor da venda do produto',
             ]);
             
-            $dados = Produto::where('id', $request->id)->first();
+            $dados = Produto::where('nome', $request->nome)->first();
 
             $money = explode(" ", $request->valor_venda);
             $SemVirgula  = str_replace('.', '', $money[1] );
@@ -162,19 +162,27 @@ class ProdutoController extends Controller
             $valor_venda = floatval ($SemPonto);
             //
 
-            if($dados != null){
-                $cat = Categoria::select('id')->where('nome_categoria', '=', $request->category)->get();
+            if($dados == null){
+                $tes= Produto::select('img_prod')->where('id', '=', $request->id)->first();
+                if($request->hasFile('foto')){
+                    $tes->img_prod = $request->id.".".$request->foto->extension();
+                    $request->foto->storeAs('prod', $tes->img_prod);
+                }
                 
                 if(Produto::where('id', '=', $request->id)->update(
                     ['nome' => $request->nome_prod,
                      'marca' => $request->marca,
                      'vlr_unitario' => $valor_venda,
-                     'id_categoria' => $cat[0]['id']]
-                )){
-                   return redirect()->route('product_list')->with('edit-status', 'sucess');
+                     'id_categoria' => $request->category,
+                     'img_prod' => $tes->img_prod
+                    ])){
+                   return redirect()->route('product_edit', ['id' => $request->id])->with('save-status', 'sucess');
                 }else{
-                   return redirect()->route('product_list')->with('edit-status', 'fail');
+                   return redirect()->route('product_edit', ['id' => $request->id])->with('save-status', 'fail');
                 }
+            }else{
+                return redirect()->route('product_edit', ['id' => $request->id])->with('save-status', 'exist');
+
             }
             
     }

@@ -117,24 +117,24 @@ class FuncionarioController extends Controller
 
         public function employee_edit($id){
             
-            $emp = Funcionario::where('id_pessoa', '=', $id)->get();
+            $list = Pessoa::join('funcionarios', 'funcionarios.id_pessoa', '=', 'pessoas.id')
+            ->join('enderecos', 'enderecos.id_pessoa', '=', 'pessoas.id')
+            ->select('pessoas.*', 'enderecos.*', 'funcionarios.*')
+            ->where('funcionarios.id_pessoa', '=', $id)->get();
         
-        foreach ($emp as $a) {
-            $pes = Pessoa::where('id', '=', $a['id_pessoa'])->get();
-            $end = Endereco::where('id_pessoa', '=', $a['id_pessoa'])->get();
-        }
+        
         
         $files = Storage::files('fun');
         $path = 0;
         
         foreach ($files as $f) {
-            if($f == "fun/". $emp[0]->foto){
+            if($f == "fun/". $list[0]->foto){
                 $path = $f;
             }
         }
 
 
-        return view('employee/edit_emp', ['list' => $emp, 'pes' => $pes, 'end' => $end, 'path' => $path] );
+        return view('employee/edit_emp', ['list' => $list, 'path' => $path] );
                 
     }
 

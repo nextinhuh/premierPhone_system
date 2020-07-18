@@ -16,7 +16,7 @@
     document.getElementById('date').value = todayDate; 
     
     var prod = [
-    @foreach ($list as $tes)
+@foreach ($list as $tes)
         [ "{{ $tes['soma'] }}", "{{ $tes['vlr_unitario'] }}", "{{$tes['id']}}", "{{$tes['nome']}}", "{{$tes['img_prod']}}"], 
     @endforeach
     ];

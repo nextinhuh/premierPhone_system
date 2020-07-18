@@ -16,7 +16,7 @@ class VendaController extends Controller
         ->selectRaw('sum(qtd_prod) as soma, produtos.nome, produtos.vlr_unitario, produtos.id, produtos.img_prod')
         ->groupBy('produtos.nome', 'produtos.vlr_unitario', 'produtos.id', 'produtos.img_prod' )
         ->get();
-
+        
         $list_fun = Pessoa::join('funcionarios', 'funcionarios.id_pessoa', '=', 'pessoas.id')
         ->select('funcionarios.id as id_fun', 'pessoas.nome', 'funcionarios.funcao')
         ->get();

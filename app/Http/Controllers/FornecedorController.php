@@ -11,14 +11,13 @@ use App\Models\Fornecedores_produto;
 class FornecedorController extends Controller
 {
     public function supplier_list(){
-        $for = Fornecedor::select()->get();
-        
-        foreach ($for as $a) {
-            $pes[] = Pessoa::where('id', '=', $a['id_pessoa'])->get();
-            $end[] = Endereco::where('id_pessoa', '=', $a['id_pessoa'])->get();
-        }
 
-        return view('supplier/supplier', ['list' => $for, 'pes' => $pes, 'pos' => -1, 'end' => $end] );
+
+        $list = Pessoa::join('fornecedores', 'fornecedores.id_pessoa', '=', 'pessoas.id')
+        ->select('pessoas.*')
+        ->get();
+
+        return view('supplier/supplier', ['list' => $list] );
     }
 
     public function supplier_register(){

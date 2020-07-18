@@ -27,7 +27,7 @@
 
 @section('main')
 
-@foreach($pes as $p)
+@foreach($list as $p)
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -104,17 +104,17 @@
                                                 placeholder="Marca" id="brand" name="cpf" value="{{$p['cpf']}}">
                                         </div>
                                     </div>
-                                    @endforeach
-                                    @foreach($list as $l)
+                                    
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="mr-sm-2" for="inlineFormCustomSelect">RG</label>
                                             <input type="text" data-toggle="tooltip" data-placement="top"
                                                 title="Informe a marca do produto" class="form-control"
-                                                placeholder="Marca" id="brand" name="rg" value="{{$l['rg']}}">
+                                                placeholder="Marca" id="brand" name="rg" value="{{$p['rg']}}">
                                         </div>
                                     </div>
-                                    @endforeach
+                                
                                     <div class="col-md-6"></div>
 
                                     <div class="col-md-12">
@@ -124,14 +124,14 @@
 
                                     </div>
 
-                                    @foreach($end as $e)
+                                    
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="mr-sm-2" for="inlineFormCustomSelect">CEP</label>
                                             <input type="text" data-toggle="tooltip" data-placement="top"
                                                 title="Informe o CEP do endereço" class="form-control" placeholder="CEP"
                                                 id="cep" name="cep" size="10" maxlength="9"
-                                                onblur="pesquisacep(this.value);" value="{{$e['cep']}}">
+                                                onblur="pesquisacep(this.value);" value="{{$p['cep']}}">
                                         </div>
                                     </div>
 
@@ -140,7 +140,7 @@
                                             <label class="mr-sm-2" for="inlineFormCustomSelect">Complemento</label>
                                             <input type="text" data-toggle="tooltip" data-placement="top"
                                                 title="Informe o complemento do endereço" class="form-control"
-                                                placeholder="Complemento" id="complemento" name="complemento" value="{{$e['complemento']}}">
+                                                placeholder="Complemento" id="complemento" name="complemento" value="{{$p['complemento']}}">
                                         </div>
                                     </div>
 
@@ -149,7 +149,7 @@
                                             <label class="mr-sm-2" for="inlineFormCustomSelect">Logradouro</label>
                                             <input type="text" data-toggle="tooltip" data-placement="top"
                                                 title="Informe o logradouro" class="form-control"
-                                                placeholder="Logradouro" id="rua" name="rua" value="{{$e['logradouro']}}">
+                                                placeholder="Logradouro" id="rua" name="rua" value="{{$p['logradouro']}}">
                                         </div>
                                     </div>
 
@@ -158,7 +158,7 @@
                                             <label class="mr-sm-2" for="inlineFormCustomSelect">Número</label>
                                             <input type="text" data-toggle="tooltip" data-placement="top"
                                                 title="Informe o número do endereço" class="form-control"
-                                                placeholder="Número" id="rua" name="num_casa" value="{{$e['num_casa']}}">
+                                                placeholder="Número" id="rua" name="num_casa" value="{{$p['num_casa']}}">
                                         </div>
                                     </div>
 
@@ -169,7 +169,7 @@
                                             <label class="mr-sm-2" for="inlineFormCustomSelect">Bairro</label>
                                             <input type="text" data-toggle="tooltip" data-placement="top"
                                                 title="Informe bairro do endereço" class="form-control"
-                                                placeholder="Bairro" id="bairro" name="bairro" value="{{$e['bairro']}}">
+                                                placeholder="Bairro" id="bairro" name="bairro" value="{{$p['bairro']}}">
                                         </div>
                                     </div>
 
@@ -178,7 +178,7 @@
                                             <label class="mr-sm-2" for="inlineFormCustomSelect">Cidade</label>
                                             <input type="text" data-toggle="tooltip" data-placement="top"
                                                 title="Informe a cidade do endereço" class="form-control"
-                                                placeholder="Cidade" id="cidade" name="cidade" value="{{$e['cidade']}}">
+                                                placeholder="Cidade" id="cidade" name="cidade" value="{{$p['cidade']}}">
                                         </div>
                                     </div>
 
@@ -187,7 +187,7 @@
                                             <label class="mr-sm-2" for="inlineFormCustomSelect">UF</label>
                                             <input type="text" data-toggle="tooltip" data-placement="top"
                                                 title="Informe a UF do endereço" class="form-control" placeholder="UF"
-                                                id="uf" name="uf" value="{{$e['uf']}}">
+                                                id="uf" name="uf" value="{{$p['uf']}}">
                                         </div>
                                     </div>
                                 </div>

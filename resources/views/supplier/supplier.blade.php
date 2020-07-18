@@ -93,9 +93,9 @@ close.addEventListener("click", () => {
                     <tbody>
 
 
-                        @foreach ($pes as $p2 )
+                        
 
-                        @foreach ($p2 as $emp2 )
+                        @foreach ($list as $emp2 )
                         <tr>
                             <td>{{$emp2['nome']}}</td>
                             <td>{{$emp2['cnpj']}}</td>
@@ -119,7 +119,7 @@ close.addEventListener("click", () => {
                         </tr>
 
                         @endforeach
-                        @endforeach
+                        
 
 
                     </tbody>

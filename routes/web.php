@@ -17,7 +17,6 @@ Route::get('/main', function () {
     return view('home_system');
 })->middleware('logado')->name('main');
 
-
 Route::group(['prefix' => '/'], function () {
     
     Route::get('', 'LoginController@tela_principal')->name("index");
@@ -26,7 +25,7 @@ Route::group(['prefix' => '/'], function () {
     Route::get('deslogando', 'LoginController@deslogando')->name("deslogando");
 });
 
-/*ROTAS PARA PRODUTOS */
+/*ROTAS PARA CATEGORIAS */
 
 Route::group(['prefix' => '/category/', 'middleware' => ['logado']], function () {
     
@@ -62,7 +61,8 @@ Route::group(['prefix' => '/product/', 'middleware' => ['logado']], function () 
     Route::get('list', 'ProdutoController@product_list')->name("product_list"); //LISTA FUNCIONÁRIOS 
     Route::get('register', 'ProdutoController@product_register')->name("product_register");
     Route::post('save', 'ProdutoController@save_product')->name("save_product"); // FORM CADASTRA FUNCIONÁRIO
-    Route::post('edit_prod', 'ProdutoController@product_edit')->name("product_edit"); // FORM EDITA FUNCIONÁRIO
+    Route::get('edit/{id}', 'ProdutoController@product_edit')->name("product_edit"); // FORM EDITA FUNCIONÁRIO
+    Route::post('editting', 'ProdutoController@save_product_edit')->name("save_product_edit"); // FORM EDITA FUNCIONÁRIO
 
 });
 
@@ -85,8 +85,6 @@ Route::group(['prefix' => '/pdf/', 'middleware' => ['logado']], function () {
     Route::get('pdfSale/{id}', 'PdfController@order_pdf')->name("sale_pdf");
 
 });
-
-
 
 /*ROTAS PARA CLIENTES */
 Route::group(['prefix' => '/costumer/', 'middleware' => ['logado']], function () {

@@ -18,7 +18,11 @@
     
         if(item[3] == produto.value){
             vlr_uni.value = 'R$ '+ item[1];
-            estoque.value = item[0];
+            if(item[0] == ""){
+                estoque.value = 0;
+            }else{
+                estoque.value = item[0];
+            }
             img.src=  linkUrl +'/' +item[4];
         }
     }
@@ -43,7 +47,7 @@
             desconto_num = 0;
             var vlr_uni2 = vlr_uni.value.replace(/[\R$ ]/g, '');
             vlr_uni2 = parseFloat(vlr_uni2);
-            if(estoque_num >= quantidade_num){
+            if(estoque_num >= quantidade_num && estoque_num > 0){
             
             if(desconto.value != null){
                 desconto_num = parseInt(desconto.value);

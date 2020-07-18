@@ -117,7 +117,7 @@ function myFunction(item, index, arr) {
 
 
 
-@foreach($pes as $p)
+@foreach($list as $p)
 <div class="col-12">
     <div class="card">
         <div class="card-body">
@@ -150,7 +150,7 @@ function myFunction(item, index, arr) {
                 @endif
 
 
-            <form action="{{route('save_edit', ['id' => $p['id']])}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('save_edit', ['id' => $p['id_pessoa']])}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-body">
                     <div class="form-group row">
@@ -199,8 +199,7 @@ function myFunction(item, index, arr) {
                                 </div>
 
                                 
-                                @endforeach
-                                @foreach($list as $a)
+                                
 
 
                                 <div class="col-md-6">
@@ -208,7 +207,7 @@ function myFunction(item, index, arr) {
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">RG</label>
                                         <input type="text" data-toggle="tooltip" data-placement="top"
                                             title="Informe o valor de compra" class="form-control"
-                                            placeholder="RG" id="rg" name="rg" value="{{$a['rg']}}">
+                                            placeholder="RG" id="rg" name="rg" value="{{$p['rg']}}">
                                     </div>
                                 </div>
 
@@ -216,16 +215,16 @@ function myFunction(item, index, arr) {
                                     <div class="form-group mb-4">
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">Raça</label>
                                         <select class="custom-select mr-sm-2" id="category" name="raca">
-                                            <option @if ($a['raca']=='' ) selected @endif>Escolha..</option>
-                                            <option value="Branco" @if ($a['raca']=='Branco' ) selected @endif>Branco
+                                            <option @if ($p['raca']=='' ) selected @endif>Escolha..</option>
+                                            <option value="Branco" @if ($p['raca']=='Branco' ) selected @endif>Branco
                                             </option>
-                                            <option value="Pardo" @if ($a['raca']=='Pardo' ) selected @endif>Pardo
+                                            <option value="Pardo" @if ($p['raca']=='Pardo' ) selected @endif>Pardo
                                             </option>
-                                            <option value="Negro" @if ($a['raca']=='Negro' ) selected @endif>Negro
+                                            <option value="Negro" @if ($p['raca']=='Negro' ) selected @endif>Negro
                                             </option>
-                                            <option value="Indígena" @if ($a['raca']=='Indígena' ) selected @endif>
+                                            <option value="Indígena" @if ($p['raca']=='Indígena' ) selected @endif>
                                                 Indígena</option>
-                                            <option value="Amarelo" @if ($a['raca']=='Amarelo' ) selected @endif>Amarelo
+                                            <option value="Amarelo" @if ($p['raca']=='Amarelo' ) selected @endif>Amarelo
                                             </option>
                                         </select>
                                     </div>
@@ -256,7 +255,7 @@ function myFunction(item, index, arr) {
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">Função</label>
                                         <input type="text" data-toggle="tooltip" data-placement="top"
                                             title="Informe a quantidade comprada" class="form-control"
-                                            placeholder="Quantidade" id="quantity" value="{{$a['funcao']}}"
+                                            placeholder="Quantidade" id="quantity" value="{{$p['funcao']}}"
                                             name="funcao">
                                     </div>
                                 </div>
@@ -266,7 +265,7 @@ function myFunction(item, index, arr) {
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">Nome do pai</label>
                                         <input type="text" data-toggle="tooltip" data-placement="top"
                                             title="Informe a quantidade comprada" class="form-control"
-                                            placeholder="Quantidade" id="quantity" value="{{$a['nome_pai']}}"
+                                            placeholder="Quantidade" id="quantity" value="{{$p['nome_pai']}}"
                                             name="nome_pai">
                                     </div>
                                 </div>
@@ -276,11 +275,11 @@ function myFunction(item, index, arr) {
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">Nome da mãe</label>
                                         <input type="text" data-toggle="tooltip" data-placement="top"
                                             title="Informe a marca do produto" class="form-control" placeholder="Marca"
-                                            id="brand" value="{{$a['nome_mae']}}" name="nome_mae">
+                                            id="brand" value="{{$p['nome_mae']}}" name="nome_mae">
                                     </div>
                                 </div>
 
-                                @endforeach
+                                
 
                                 <div class="col-md-12">
 
@@ -288,7 +287,7 @@ function myFunction(item, index, arr) {
                                     <h5 class="card-title">Endereço</h5>
 
                                 </div>
-                                @foreach($end as $e)
+                                
 
 
                                 <div class="col-md-6">
@@ -297,7 +296,7 @@ function myFunction(item, index, arr) {
                                         <input type="text" data-toggle="tooltip" data-placement="top"
                                             title="Informe o CEP do endereço" class="form-control" placeholder="CEP"
                                             id="cep" name="cep" size="10" maxlength="9"
-                                            onblur="pesquisacep(this.value);" value="{{$e['cep']}}">
+                                            onblur="pesquisacep(this.value);" value="{{$p['cep']}}">
                                     </div>
                                 </div>
 
@@ -307,7 +306,7 @@ function myFunction(item, index, arr) {
                                         <input type="text" data-toggle="tooltip" data-placement="top"
                                             title="Informe o complemento do endereço" class="form-control"
                                             placeholder="Complemento" id="complemento" name="complemento"
-                                            value="{{$e['complemento']}}">
+                                            value="{{$p['complemento']}}">
                                     </div>
                                 </div>
 
@@ -316,7 +315,7 @@ function myFunction(item, index, arr) {
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">Logradouro</label>
                                         <input type="text" data-toggle="tooltip" data-placement="top"
                                             title="Informe o logradouro" class="form-control" placeholder="Logradouro"
-                                            id="rua" name="rua" value="{{$e['logradouro']}}">
+                                            id="rua" name="rua" value="{{$p['logradouro']}}">
                                     </div>
                                 </div>
 
@@ -325,7 +324,7 @@ function myFunction(item, index, arr) {
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">Número</label>
                                         <input type="text" data-toggle="tooltip" data-placement="top"
                                             title="Informe o número do endereço" class="form-control"
-                                            placeholder="Número" id="rua" name="num_casa" value="{{$e['num_casa']}}">
+                                            placeholder="Número" id="rua" name="num_casa" value="{{$p['num_casa']}}">
                                     </div>
                                 </div>
 
@@ -336,7 +335,7 @@ function myFunction(item, index, arr) {
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">Bairro</label>
                                         <input type="text" data-toggle="tooltip" data-placement="top"
                                             title="Informe bairro do endereço" class="form-control" placeholder="Bairro"
-                                            id="bairro" name="bairro" value="{{$e['bairro']}}">
+                                            id="bairro" name="bairro" value="{{$p['bairro']}}">
                                     </div>
                                 </div>
 
@@ -345,7 +344,7 @@ function myFunction(item, index, arr) {
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">Cidade</label>
                                         <input type="text" data-toggle="tooltip" data-placement="top"
                                             title="Informe a cidade do endereço" class="form-control"
-                                            placeholder="Cidade" id="cidade" name="cidade" value="{{$e['cidade']}}">
+                                            placeholder="Cidade" id="cidade" name="cidade" value="{{$p['cidade']}}">
                                     </div>
                                 </div>
 
@@ -354,7 +353,7 @@ function myFunction(item, index, arr) {
                                         <label class="mr-sm-2" for="inlineFormCustomSelect">UF</label>
                                         <input type="text" data-toggle="tooltip" data-placement="top"
                                             title="Informe a UF do endereço" class="form-control" placeholder="UF"
-                                            id="uf" name="uf" value="{{$e['uf']}}">
+                                            id="uf" name="uf" value="{{$p['uf']}}">
                                     </div>
                                 </div>
 
