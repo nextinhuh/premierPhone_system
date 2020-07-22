@@ -7,9 +7,10 @@
 <html>
 
 <head>
-    <title>PREMIER PHONE</title>
+    <title>Premier Phone</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/assets/images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('/assets/front-page/css/main.css')}}" />
     <link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@1,700&display=swap" rel="stylesheet">
 </head>
@@ -23,7 +24,7 @@
             <nav id="nav">
             <a href="{{route('index')}}">Inicio</a>
                 <a href="#three">contato</a>
-                <a class="singup" href="{{route('login')}}">Sing In</a>
+                <a  href="{{route('login')}}">Log in</a>
             </nav>
         </div>
     </header>

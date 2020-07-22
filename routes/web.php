@@ -25,6 +25,15 @@ Route::group(['prefix' => '/'], function () {
     Route::get('deslogando', 'LoginController@deslogando')->name("deslogando");
 });
 
+/* ROTAS PARA VIEW DO CLIENTE */
+Route::group(['prefix' => '/client/', 'middleware' => ['editClient']], function () {
+    
+    Route::get('', 'ClienteController@client_main')->name("client_main");
+    Route::get('my_devices', 'ClienteController@client_device')->name("client_device");
+    Route::get('order', 'ClienteController@client_order')->name("client_order");
+   /* Route::get('deslogando', 'ClienteController@deslogando')->name("deslogando");*/
+});
+
 /*ROTAS PARA CATEGORIAS */
 
 Route::group(['prefix' => '/category/', 'middleware' => ['logado']], function () {
@@ -87,7 +96,7 @@ Route::group(['prefix' => '/pdf/', 'middleware' => ['logado']], function () {
 });
 
 /*ROTAS PARA CLIENTES */
-Route::group(['prefix' => '/costumer/', 'middleware' => ['logado']], function () {
+Route::group(['prefix' => '/costumer/', 'middleware' => ['editClient']], function () {
     
     Route::get('list', 'ClienteController@costumer_list')->name("list_costumer"); //LISTA FUNCIONÁRIOS
     Route::get('register', 'ClienteController@costumer_register')->name("register_cos");

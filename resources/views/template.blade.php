@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/assets/images/favicon.png')}}">
-    <title>Adminmart Template - The Ultimate Multipurpose admin template</title>
+    <title>Premier Phone - System</title>
     <!-- Custom CSS -->
 
     <link href="{{asset('/assets/extra-libs/c3/c3.min.css')}}" rel="stylesheet">
@@ -80,7 +80,7 @@
                     <!-- ============================================================== -->
                     <div class="navbar-brand">
                         <!-- Logo icon -->
-                        <a href="index.html">
+                        <a href="{{route('main')}}">
 
                             <!--End Logo icon -->
                             <!-- Logo text -->
@@ -205,8 +205,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                                <img src="{{ asset("storage/".session('fun_foto')) }}" alt="user"
-                                    class="rounded-circle" width="48" height="48">
+                                <img src="{{ asset("storage/".session('fun_foto')) }}" alt="user" class="rounded-circle"
+                                    width="48" height="48">
                                 <span class="ml-2 d-none d-lg-inline-block"><span>Olá,</span> <span
                                         class="text-dark">{{session('fun_nome')}}</span> <i data-feather="chevron-down"
                                         class="svg-icon"></i></span>
@@ -386,13 +386,11 @@
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-7 align-self-center">
-                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">Bom dia,
-                            {{session('fun_nome')}}!</h3>
+                        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1">
+                          {{session('saudacao')}},  {{session('fun_nome')}}! </h3>
                     </div>
-
                 </div>
             </div>
-
             <div class="container-fluid">
 
                 @yield('main')

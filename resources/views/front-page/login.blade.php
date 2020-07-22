@@ -2,9 +2,10 @@
 <html>
 
 <head>
-    <title>PREMIER PHONE login</title>
+    <title>Premier Phone - Login</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('/assets/images/favicon.png')}}">
     <link rel="stylesheet" href="{{asset('/assets/front-page/css/main.css')}}" />
     <link rel="stylesheet" href="{{asset('/assets/front-page/css/bootstrap-4.5.0-dist/css/bootstrap.css')}}" />
     <link rel="stylesheet" href="{{asset('/assets/front-page/css/bootstrap-4.5.0-dist/css/bootstrap-reboot.css')}}" />
@@ -18,7 +19,7 @@
             <a href="{{route('index')}}" class="logo">Premier Phone</a>
             <nav id="nav">
                 <a href="{{route('index')}}">Inicio</a>
-                <a class="singup" href="{{route('login')}}">Sing In</a>
+                <a  href="{{route('login')}}">Log in</a>
             </nav>
         </div>
     </header>
@@ -38,6 +39,9 @@
                 </div>@endif
                 @if (session('login-status') == "fail" )
                 <div class="alert alert-danger"><b>Ops!</b> Usuário ou senha incorretos, favor tentar novamente!</div>
+                @endif
+                @if (session('login-status') == "failType" )
+                <div class="alert alert-danger"><b>Ops!</b> Tipo de usuário incorreto, favor tentar novamente!</div>
                 @endif
                 <div class="admin-form-body">
                     <form method="POST" action="{{route('logando')}}">

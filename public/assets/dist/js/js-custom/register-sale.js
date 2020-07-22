@@ -48,11 +48,12 @@
             var vlr_uni2 = vlr_uni.value.replace(/[\R$ ]/g, '');
             vlr_uni2 = parseFloat(vlr_uni2);
             if(estoque_num >= quantidade_num && estoque_num > 0){
-            
-            if(desconto.value != null){
+            if(desconto.value != ""){
                 desconto_num = parseInt(desconto.value);
                 desconto_num = vlr_uni2 * (desconto_num/100);
                 vlr_uni2 = vlr_uni2 - desconto_num;
+            }else{
+                desconto.value = 0;
             }
             estoque.value = estoque.value - quantidade.value;
             prod.forEach(setQtdMais);

@@ -286,7 +286,7 @@ myObject.forEach(setParams);
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Funcionários cadastrados</h4>
+                <h4 class="card-title">Usuários cadastrados</h4>
                 <br>
                 @if (session('del-status') == "sucess" )
                 <div class="alert alert-success"><b>Ótimo!</b> Usuário excluído com sucesso!</div>

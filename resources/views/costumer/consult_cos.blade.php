@@ -44,7 +44,7 @@
 
 
             <div class="table-responsive">
-                <table id="zero_config" class="table table-striped table-bordered no-wrap">
+                <table id="zero_config4" class="table table-striped table-bordered no-wrap">
                     <thead>
                         <tr>
                             <th scope="col">Nome</th>

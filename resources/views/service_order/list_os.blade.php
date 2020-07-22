@@ -149,7 +149,6 @@ close.addEventListener("click", () => {
                                             <option value="Concluído">Concluído</option>
                                             <option value="Aguardando peças">Aguardando peças</option>
                                             <option value="Bloqueado">Bloqueado</option>
-                                            <option value="Finalizado">Finalizado</option>
                                         </select>
                                     </div>
                                 </div>

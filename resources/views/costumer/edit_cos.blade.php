@@ -77,6 +77,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
+                                        
                                             <label class="mr-sm-2" for="inlineFormCustomSelect">Nome do cliente</label>
                                             <input type="text" data-toggle="tooltip" data-placement="top"
                                                 title="Informe o nome do cliente" class="form-control"
