@@ -65,10 +65,10 @@ public function client_device(Request $request){
     $id = $request->session()->get('cli_id_cliente');
 
     $equip = Equipamento::select('marca', 'modelo', 'cor', 'historico')->where('id_cliente', '=', $id)->get();
-    
+    //Using API Rest Bing Search Image
     $endpoint = 'https://api.cognitive.microsoft.com/bing/v7.0/images/search';
     // Replace the accessKey string value with your valid access key.
-    $accessKey = '486d90da74f8423283d3bd8e76d7a998';
+    $accessKey = 'enter your key here';
     $headers = "Ocp-Apim-Subscription-Key: $accessKey\r\n";
     $options = array ( 'http' => array (
         'header' => $headers,
